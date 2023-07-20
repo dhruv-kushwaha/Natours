@@ -1,0 +1,17 @@
+NOTE: .select('+password')
+
+In Mongoose, the .select('+password') syntax is used to include a field in the query result that is excluded by default.
+
+By default, when querying documents from a Mongoose model, certain fields, like sensitive or private data, may be excluded from the query result for security or privacy reasons. One such field is often the password field, as it should not be exposed or returned in the query result by default.
+
+However, there may be scenarios where you explicitly want to include the password field in the query result. In such cases, you can use the .select('+password') syntax to override the default exclusion and include the password field in the result.
+
+For example:
+
+javascript
+Copy code
+const user = await User.findOne({ email: 'example@example.com' }).select('+password');
+
+In the above code, the findOne query fetches a user document based on the email field, and the .select('+password') part ensures that the password field is included in the query result. This allows you to access and use the password field in the returned user object.
+
+It's important to exercise caution when including sensitive data like passwords in query results, as it may pose a security risk if exposed unintentionally. Generally, it is recommended to carefully consider the necessity of including sensitive fields in query results and apply appropriate security measures.
