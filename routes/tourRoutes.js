@@ -2,6 +2,8 @@ const express = require('express');
 
 const tourController = require('./../controller/tourController');
 const authController = require('./../controller/authController');
+
+// Import Review Router for nested routing
 const reviewRouter = require('./reviewRoutes');
 
 const router = express.Router();
@@ -18,6 +20,7 @@ const router = express.Router();
 //     reviewController.createReview
 //   );
 
+// Just like in app.js
 router.use('/:tourId/reviews', reviewRouter);
 
 // Aliasing example

@@ -101,6 +101,7 @@ const tourSchema = new mongoose.Schema(
         coordinates: [Number],
         address: String,
         description: String,
+        day: Number,
       },
     ],
     guides: [
@@ -137,7 +138,7 @@ tourSchema.pre('save', function (next) {
   next();
 });
 
-// Modelling Tour Guides : Enbedding
+// Modelling Tour Guides : Embedding
 // tourSchema.pre('save', async function (next) {
 //   const guidesPromises = this.guides.map(async (id) => await User.findById(id));
 //   this.guides = await Promise.all(guidesPromises);
@@ -158,6 +159,7 @@ tourSchema.pre(/^find/, function (next) {
 
 // Populate Tour Guides
 tourSchema.pre(/^find/, function (next) {
+  // this points to the current query
   this.populate({
     path: 'guides',
     select: '-__v -passwordChangedAt',

@@ -1,9 +1,10 @@
 const catchAsync = require('../utils/catchAsync');
 const Review = require('./../model/reviewModel');
+const factory = require('./handlerFactory');
 
 exports.getAllReviews = catchAsync(async (req, res, next) => {
   let filter = {};
-
+  // For Nested GET endpoint
   if (req.params.tourId) filter = { tour: req.params.tourId };
 
   const reviews = await Review.find(filter);
@@ -31,3 +32,7 @@ exports.createReview = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.deleteReview = factory.deleteOne(Review);
+
+exports.updateReview = factory.updateOne(Review);
